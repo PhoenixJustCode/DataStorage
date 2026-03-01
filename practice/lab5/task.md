@@ -1,0 +1,95 @@
+vDataset: ab_test_data.csv
+
+You can generate the dataset yourself using the Python code below. It simulates 10,000 website visitors randomly assigned to either the Control (A) or Treatment (B) group. The dataset contains:
+
+· visitor_id: unique identifier
+
+· group: "A" (control) or "B" (treatment)
+
+· converted: 1 if purchased, 0 otherwise
+
+· time_on_site: seconds spent on website (float)
+
+· pages_viewed: number of pages viewed (integer)
+
+The treatment group is designed to have a slightly higher conversion rate (+1.5%), slightly longer time on site (+10 sec), and slightly more pages viewed (+0.3 pages).
+
+Generate the dataset:
+
+python
+
+import pandas as pd
+
+import numpy as np
+
+np.random.seed(42)
+
+n = 10000
+
+# Random assignment to groups (50/50)
+
+group = np.random.choice(['A', 'B'], size=n, p=[0.5, 0.5])
+
+# Base conversion rates
+
+conv_rate_A = 0.05
+
+conv_rate_B = 0.065 # +1.5% absolute
+
+converted = np.where(group == 'A',
+
+np.random.binomial(1, conv_rate_A, n),
+
+np.random.binomial(1, conv_rate_B, n))
+
+# Time on site (seconds)
+
+time_A = np.random.normal(120, 30, n) # mean 120, sd 30
+
+time_B = np.random.normal(130, 35, n) # mean 130, sd 35
+
+time_on_site = np.where(group == 'A', time_A, time_B)
+
+time_on_site = np.clip(time_on_site, 0, None) # no negative times
+
+# Pages viewed
+
+pages_A = np.random.poisson(4, n) # mean 4
+
+pages_B = np.random.poisson(4.3, n) # mean 4.3
+
+pages_viewed = np.where(group == 'A', pages_A, pages_B)
+
+# Create DataFrame
+
+df = pd.DataFrame({
+
+'visitor_id': range(1, n+1),Lab Tasks: A/B Testing Analysis
+
+Your goal is to analyze whether the new website design (Treatment B) performs better than the old design (Control A). Follow the steps below.
+
+1. Formulate Hypotheses for Each Metric
+
+Write null and alternative hypotheses for:
+
+· Conversion rate (proportion of visitors who purchase)
+
+· Time on site (average seconds spent)
+
+· Pages viewed (average number of pages)
+
+Example for conversion:
+
+· H₀: p_B ≤ p_A (no improvement)
+
+· H₁: p_B > p_A (one-tailed, because you only care if B is better)
+
+2. Check Assumptions
+
+For each metric, verify the necessary conditions for the chosen test:
+
+· Conversion rate (two-proportion z-test):
+
+o Independent observations (random assignment)
+
+o Sample size large enough (expected successes/failures ≥ 10 in each group
