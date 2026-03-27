@@ -1,2 +1,9 @@
 .xls
 .csv
+*.pptx
+*.docx
+*.pdf
+*.zip
+*.claude
+*.log
+*.venv

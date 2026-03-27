@@ -1,7 +1,7 @@
-# ==============================
+ 
 # Regression Analysis
 # California Housing Dataset
-# ==============================
+ 
 
 # Import libraries
 import pandas as pd
@@ -18,9 +18,9 @@ import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 
-# ==============================
+ 
 # 1. Load Dataset
-# ==============================
+ 
 
 housing = fetch_california_housing()
 
@@ -30,9 +30,9 @@ df["MedHouseVal"] = housing.target
 print(df.head())
 
 
-# ==============================
+ 
 # 2. Exploratory Data Analysis
-# ==============================
+ 
 
 # Summary statistics
 print(df.describe())
@@ -49,9 +49,9 @@ plt.title("Correlation Matrix")
 plt.show()
 
 
-# ==============================
+ 
 # 3. Multiple Linear Regression
-# ==============================
+ 
 
 X = df.drop("MedHouseVal", axis=1)
 y = df["MedHouseVal"]
@@ -63,9 +63,9 @@ model = sm.OLS(y, X_const).fit()
 print(model.summary())
 
 
-# ==============================
+ 
 # 4. VIF (Multicollinearity)
-# ==============================
+ 
 
 vif_data = pd.DataFrame()
 vif_data["Feature"] = X_const.columns
@@ -78,9 +78,9 @@ print("\nVIF values:")
 print(vif_data)
 
 
-# ==============================
+ 
 # 5. Model Refinement
-# ==============================
+ 
 
 # Remove AveBedrms (high correlation with AveRooms)
 
@@ -93,9 +93,9 @@ print("\nRefined model:")
 print(model_refined.summary())
 
 
-# ==============================
+ 
 # 6. Residual Analysis
-# ==============================
+ 
 
 residuals = model_refined.resid
 
@@ -109,9 +109,9 @@ plt.title("Residual Distribution")
 plt.show()
 
 
-# ==============================
+ 
 # 7. Train/Test Prediction
-# ==============================
+ 
 
 X = df.drop("MedHouseVal", axis=1)
 y = df["MedHouseVal"]
