@@ -1,6 +1,6 @@
 .xls
 .csv
-*.pptx
+# *.pptx
 *.docx
 *.pdf
 *.zip
