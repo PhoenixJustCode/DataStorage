@@ -5,7 +5,7 @@ Unit tests for the transform() function.
 import pandas as pd
 import pytest
 
-from etl_pipeline import transform
+from DataStorage.practice.lab11.etl_pipeline import transform
 
 
 def _make_user(email="john@example.com", gender="male", first="John", last="Doe",

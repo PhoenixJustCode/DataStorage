@@ -47,21 +47,3 @@ pytest test_transform.py -v
 docker build -t etl-pipeline .
 docker run --rm etl-pipeline
 ```
-\
-
-
-Как запустить
-Через Docker (рекомендуется):
-
-
-cd d:/UNIVERSITY/4semestr/DataStorage/lab11
-docker build -t etl-pipeline .
-docker run --rm etl-pipeline                        # один запуск пайплайна
-docker run --rm etl-pipeline pytest test_transform.py -v  # тесты
-Без Docker (нужен Python 3.11+):
-
-
-pip install -r requirements.txt
-python etl_pipeline.py       # один запуск
-python scheduler.py          # 6 запусков по 10 мин
-pytest test_transform.py -v  # тесты

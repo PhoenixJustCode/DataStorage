@@ -5,7 +5,7 @@ Scheduler: Runs the ETL pipeline every 10 minutes for one hour (6 runs).
 import time
 from datetime import datetime
 
-from etl_pipeline import run_etl
+from DataStorage.practice.lab11.etl_pipeline import run_etl
 
 INTERVAL_SECONDS = 10 * 60  # 10 minutes
 TOTAL_RUNS = 6
